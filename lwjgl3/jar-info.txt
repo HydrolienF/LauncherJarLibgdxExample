@@ -1,0 +1,1 @@
+/home/sese/LauncherJarLibgdxExample/lwjgl3/build/libs/LauncherJarLibgdxExample-1.0.3.jar

@@ -1,5 +1,18 @@
 # LauncherJarLibgdxExample
 
+## MUST DO THIS
+**ADD THIS TO** `lwjgl3/build.gradle` 
+```groovy
+tasks.register("printJarPath") {
+       def jarTask = tasks.named("jar").get()
+       def jarName = jarTask.archiveFile.get().asFile
+       def logFile = file("./jar-info.txt")
+        
+        logFile.text = "${jarName.absolutePath}"
+        println "Logged JAR name to: ${jarName.absolutePath}"
+}
+```
+
 
 A [libGDX](https://libgdx.com/) example project for [LauncherJar](https://github.com/HydrolienF/LauncherJar), generated with [gdx-liftoff](https://github.com/tommyettinger/gdx-liftoff).
 

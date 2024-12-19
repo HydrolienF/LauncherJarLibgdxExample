@@ -13,8 +13,8 @@ env:
   JRE_VERSION: '21.0.1'
   GITHUB_TOKEN: ${{ github.token }}
   ARTIFACT_NAME: 'LauncherJarLibgdxExample'
-  USER_NAME: 'HydrolienF'
-  USER_EMAIL: 'hydrolien.f@gmail.com'
+  USER_NAME: ${{ github.actor }}
+  USER_EMAIL: ${{ github.actor }}@users.noreply.github.com
   UUID: 'e1caab6b-1230-4691-a880-dd2d0b8ebb98'
 
 jobs:
@@ -32,7 +32,7 @@ jobs:
         java-version: ${{ env.JAVA_VERSION }}
 
     # If version.md does not exist read the version from gradle.properties
-    - name: Update version.md from gradle.properties 
+    - name: Update version.md from gradle.properties
       shell: pwsh
       run: |
         if (!(Test-Path "version.md")) {
@@ -62,7 +62,9 @@ jobs:
         chmod 777 gradlew
         ./gradlew jar -Pversion='${{ steps.version.outputs.content }}'
         # For liftoff project (The new default libgdx project setup tool)
-        mv lwjgl3/build/libs/*.jar ${{ env.ARTIFACT_NAME }}.jar
+        $full_path = ./gradlew printJarPath | Select-String "Logged.*" | ForEach-Object { ($_ -split ":")[1].Trim() }
+        echo "JAR PATH : $full_path"
+        mv $full_path FragmentOfTheAbyss.jar
         # For the previous libgdx project setup tool
         # mv desktop/build/libs/*.jar ${{ env.ARTIFACT_NAME }}.jar
         ls
