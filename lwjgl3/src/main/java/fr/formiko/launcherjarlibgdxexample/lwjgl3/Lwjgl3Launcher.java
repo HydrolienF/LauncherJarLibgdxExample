@@ -1,8 +1,13 @@
 package fr.formiko.launcherjarlibgdxexample.lwjgl3;
 
+import fr.formiko.launcherjarlibgdxexample.Game;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.util.stream.Collectors;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
-import fr.formiko.launcherjarlibgdxexample.Game;
 
 /** Launches the desktop (LWJGL3) application. */
 public class Lwjgl3Launcher {
@@ -10,7 +15,7 @@ public class Lwjgl3Launcher {
         // return version
         if (args.length > 0 && args[0].replace("-", "").equalsIgnoreCase("version")) {
             try {
-                InputStream is = LauncherJarExample.class.getClassLoader().getResourceAsStream("version.md");
+                InputStream is = Lwjgl3Launcher.class.getClassLoader().getResourceAsStream("version.md");
                 String version = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8)).lines()
                         .collect(Collectors.joining("\n")).strip();
                 System.out.println(version);
