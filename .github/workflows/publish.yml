@@ -55,6 +55,11 @@ jobs:
           mkdir src/main/resources
         }
         cp version.md src/main/resources/
+        if (!(Test-Path "assets")) {
+          mkdir assets
+        }
+        cp version.md assets
+        
         if (!(Test-Path "CHANGELOG*")) {
           New-Item CHANGELOG.md
         }
