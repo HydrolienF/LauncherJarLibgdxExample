@@ -4,8 +4,8 @@ on:
   pull_request:
     branches: [master, main]
     types: [closed]
-  push:
-    branches: [master, main]
+  # push:
+  #   branches: [master, main]
 
 env:
   JAVA_VERSION: '21'
@@ -19,7 +19,7 @@ env:
 
 jobs:
   releaseJob:
-    if: github.event.pull_request.merged == true || github.event_name == 'push'
+    if: github.event.pull_request.merged == true # || github.event_name == 'push'
     runs-on: ubuntu-latest
     outputs:
       upload_url: ${{ steps.create_release.outputs.upload_url }}
@@ -119,7 +119,7 @@ jobs:
             os: macos-latest
           - launcher-extension: pkg
             os: macos-latest
-    if: github.event.pull_request.merged == true || github.event_name == 'push'
+    if: github.event.pull_request.merged == true # || github.event_name == 'push'
     needs: releaseJob
     runs-on: ${{ matrix.os }}
     steps:
